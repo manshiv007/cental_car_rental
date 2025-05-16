@@ -7,6 +7,7 @@ const router = require("./server/routes/route")
 const cors = require("cors")
 db()
 seedAdmin()
+
 require("dotenv").config()
 app.use("/uploads",express.static(path.join(__dirname,"server","public","uploads")))
 app.use(cors())
