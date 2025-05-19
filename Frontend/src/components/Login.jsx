@@ -45,9 +45,10 @@ const Login = () => {
 
       toast.success("Login successfully");
 
-      localStorage.setItem("token", token);
-      localStorage.setItem("userId", user.id);
-      localStorage.setItem("userType", user.userType);
+      sessionStorage.setItem("token", token);
+      sessionStorage.setItem("auth", true);
+      sessionStorage.setItem("userId", user.id);
+      sessionStorage.setItem("userType", user.userType);
 
       switch (user.userType) {
         case "admin":
