@@ -31,7 +31,7 @@ router.post("/deletebrand",deleteBrand)
 router.post( "/addcar",upload.single("image"),addCar)
 router.post("/getcars",getCars)
 router.post(  "/getcarbyid",getCarById)
-router.post("/updatecar",updateCar)
+router.post("/updatecar", upload.none(), updateCar);
 router.post( "/deletecar",deleteCar)
 
 router.post("/registerrenter",registerRenter)

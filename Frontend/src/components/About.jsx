@@ -336,8 +336,8 @@ export default function About(){
                 <h1 className="text-white">Interested in Renting?</h1>
                 <p className="text-white">Don't hesitate and send us a message.</p>
                 <div className="banner-btn">
-                    <a href="#" className="btn btn-secondary rounded-pill py-3 px-4 px-md-5 me-2">WhatchApp</a>
-                    <a href="#" className="btn btn-primary rounded-pill py-3 px-4 px-md-5 ms-2">Contact Us</a>
+                    <a href="https://web.whatsapp.com/" className="btn btn-secondary rounded-pill py-3 px-4 px-md-5 me-2">WhatchApp</a>
+                    <a href="https://mail.google.com/mail/" className="btn btn-primary rounded-pill py-3 px-4 px-md-5 ms-2">Contact Us</a>
                 </div>
             </div>
         </div>

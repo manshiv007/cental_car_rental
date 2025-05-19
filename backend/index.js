@@ -8,8 +8,9 @@ const cors = require("cors")
 db()
 seedAdmin()
 
+app.use('/uploads', express.static(path.join(__dirname, 'server/public/uploads')));
 require("dotenv").config()
-app.use("/uploads",express.static(path.join(__dirname,"server","public","uploads")))
+
 app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))

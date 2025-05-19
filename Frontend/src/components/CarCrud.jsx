@@ -52,15 +52,29 @@ const CrudCar = () => {
     try {
       if (editingCarId) {
         data.append("id", editingCarId);
+        console.log("Updated data is",data)
         await axios.post("http://localhost:3001/api/updatecar", data, {
           headers: { "Content-Type": "multipart/form-data" },
-        });
-        toast.success("Car Updated successfully")
+        }).then(data=>{
+          console.log(data)
+          if(data.data.success){
+            toast.success(data.data.message)
+          }
+          else{
+            toast.error()
+          }
+        })
       } else {
         await axios.post("http://localhost:3001/api/addcar", data, {
           headers: { "Content-Type": "multipart/form-data" },
-        });
-        toast.success("Car Add successfully")
+        })
+        .then(data=>{
+         if (data.data.sucess){
+          toast.success(data.data.message)
+         } else{
+          toast.error(data.data.message)
+         }
+        })
       }
       setFormData({
         name: "",
@@ -189,8 +203,8 @@ const CrudCar = () => {
                 required
               >
                 <option value="">Select Brand</option>
-                {brands.map((brand) => (
-                  <option key={brand._id} value={brand._id}>
+                {brands?.map((brand) => (
+                  <option key={brand._id} value={brand?._id}>
                     {brand.name}
                   </option>
                 ))}

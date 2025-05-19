@@ -83,7 +83,7 @@ const getCarById = async (req, res) => {
       });
     }
 
-    const car = await Car.findById(id);
+    const car = await Car.findById(id).populate('brandId');
     if (!car) {
       return res.json({
         status: 404,
@@ -110,7 +110,7 @@ const getCarById = async (req, res) => {
 // Update Car
 const updateCar = async (req, res) => {
   try {
-    const { id, name, description, price } = req.body;
+    const { id, name, brandId, description, price } = req.body;
 
     if (!id) {
       return res.json({
@@ -121,10 +121,10 @@ const updateCar = async (req, res) => {
     }
 
     const updatedCar = await Car.findByIdAndUpdate(
-      id,
-      { name, description, price }, // ✅ include price
-      { new: true }
-    );
+        id,
+        { name, brandId, description, price },
+        { new: true }
+      ).populate("brandId"); 
 
     if (!updatedCar) {
       return res.json({
