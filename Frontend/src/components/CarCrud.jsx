@@ -4,11 +4,10 @@ import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 const CrudCar = () => {
-
-  const authenticate=sessionStorage.getItem("authenticate")
+  const authenticate=sessionStorage.getItem("auth")
   const nav= useNavigate()
     if(!authenticate){
-      navigate("/login")        
+      nav("/login")        
     }
   const [cars, setCars] = useState([]);
   const [brands, setBrands] = useState([]);

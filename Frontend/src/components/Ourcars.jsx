@@ -35,7 +35,7 @@ export default function Ourcars(){
                     <div className="categories-img rounded-top d-flex justify-content-center align-items-center" style={{ height: 'auto' }}> 
                        <img 
                             src={baseUrl+car?.image} 
-                            className="img-fluid w-90 rounded-top" 
+                            className="img-fluid w-40 rounded-top" 
                             alt="" 
                             />
                     </div> 

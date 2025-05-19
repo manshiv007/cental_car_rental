@@ -3,12 +3,11 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 const HirerDashboard = () => {
-  
-  const navigate = useNavigate()
-    
-  const handleLogout = () => {
-    localStorage.clear()
-    navigate("/login");
+
+ const authenticate=sessionStorage.getItem("authenticate")
+ const nav= useNavigate()
+     if(!authenticate){
+       nav("/login") 
   };
   
 
