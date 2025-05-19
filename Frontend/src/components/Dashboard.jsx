@@ -6,8 +6,7 @@ const AdminDashboard = () => {
   
   const handleLogout = () =>{
     
-    localStorage.clear()
-
+    sessionStorage.clear()
     navigate("/login")
   }
 
