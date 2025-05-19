@@ -17,7 +17,7 @@ const MakeBooking = () => {
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
-
+  
   // Fetch all available cars from the server
   useEffect(() => {
     const fetchCars = async () => {
@@ -50,7 +50,7 @@ const MakeBooking = () => {
     setLoading(true);
     setMessage("");
 
-    const hirerId = localStorage.getItem("userId");
+    const hirerId = sessionStorage.getItem("userId");
 
     console.log("hirerId:", hirerId);
     console.log("carId:", selectedCarId);
@@ -90,7 +90,7 @@ const MakeBooking = () => {
   };
   
   const handleLogout = () => {
-    localStorage.clear()
+    sessionStorage.clear()
     navigate("/login");
   };
 
@@ -135,7 +135,7 @@ const MakeBooking = () => {
   <input
     type="hidden"
     name="hirerId"
-    value={localStorage.getItem("userId") || ""}
+    value={sessionStorage.getItem("userId") || ""}
   />
   <input
     type="hidden"

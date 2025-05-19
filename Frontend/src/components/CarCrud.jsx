@@ -42,7 +42,7 @@ const CrudCar = () => {
     fetchBrands();
   }, []);
   const handleLogout = () => {
-    localStorage.clear()
+    sessionStorage.clear()
     navigate("/login");
   };
   const handleSubmit = async (e) => {
