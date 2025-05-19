@@ -1,15 +1,21 @@
 import React from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const AdminDashboard = () => {
-  const navigate = useNavigate();
+  const nav= useNavigate()
+  useEffect(()=>{
+    const authenticate=sessionStorage.getItem("auth")
+    if(!authenticate){
+      nav("/login")        
+    }
+  },[])
+  const navigate= useNavigate()
   
   const handleLogout = () =>{
-    
     sessionStorage.clear()
-    navigate("/login")
+    nav("/login")
   }
-
 
   return (
     

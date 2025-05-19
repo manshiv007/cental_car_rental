@@ -6,6 +6,14 @@ import "react-toastify/dist/ReactToastify.css";
 
 
 const MakeBooking = () => {
+   const nav= useNavigate()
+    useEffect(()=>{
+      const authenticate=sessionStorage.getItem("auth")
+      if(!authenticate){
+        nav("/login")        
+      }
+    },[])
+  
   const [cars, setCars] = useState([]);
   const [selectedCarId, setSelectedCarId] = useState("");
   const [brandId, setBrandId] = useState("");

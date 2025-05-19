@@ -3,6 +3,13 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const BookingHistory = () => {
+  const nav= useNavigate()
+    useEffect(()=>{
+      const authenticate=sessionStorage.getItem("auth")
+          if(!authenticate){
+            nav("/login")        
+          }
+      },[])
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
@@ -14,7 +21,7 @@ const BookingHistory = () => {
       setMessage("");
 
       try {
-        const userId = localStorage.getItem("userId");
+        const userId = sessionStorage.getItem("userId");
         console.log(userId);
 
         const response = await axios.post("http://localhost:3001/api/getallbooking", {
@@ -40,8 +47,8 @@ const BookingHistory = () => {
 
 
   const handleLogout = () =>{
-    localStorage.removeItem("userId")
-    localStorage.removeItem("userType")
+    sessionStorage.removeItem("userId")
+    sesssionStorage.removeItem("userType")
 
     navigate("/login/admin")
   }

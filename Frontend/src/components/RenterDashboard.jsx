@@ -7,8 +7,8 @@ const RenterDashboard = () => {
 
   // ✅ Redirect to login if not logged in
   useEffect(() => {
-    const userId = localStorage.getItem("userId");
-    const userType = localStorage.getItem("userType");
+    const userId = sessionStorage.getItem("userId");
+    const userType = sessionStorage.getItem("userType");
 
     if (!userId || userType !== "renter") {
       navigate("/login"); // change to your actual login route
@@ -17,8 +17,8 @@ const RenterDashboard = () => {
 
   // ✅ Logout handler
   const handleLogout = () => {
-    localStorage.removeItem("userId");
-    localStorage.removeItem("userType");
+    sessionStorage.removeItem("userId");
+    sessionStorage.removeItem("userType");
     navigate("/login"); // make sure this matches your route
   };
 

@@ -1,13 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 
 const HirerDashboard = () => {
-
- const authenticate=sessionStorage.getItem("authenticate")
- const nav= useNavigate()
-     if(!authenticate){
-       nav("/login") 
+  
+  const nav= useNavigate()
+    useEffect(()=>{
+      const authenticate=sessionStorage.getItem("auth")
+          if(!authenticate){
+            nav("/login")        
+          }
+      },[])
+  const navigate = useNavigate()
+    
+  const handleLogout = () => {
+    localStorage.clear()
+    navigate("/login");
   };
   
 

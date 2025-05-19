@@ -3,6 +3,13 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios"; // Make sure axios is installed
 
 const ListofHirer = () => {
+  const nav= useNavigate()
+    useEffect(()=>{
+      const authenticate=sessionStorage.getItem("auth")
+          if(!authenticate){
+            nav("/login")        
+          }
+      },[])
   const navigate = useNavigate();
   const [hirer, setHirer] = useState([]);
 
@@ -24,7 +31,7 @@ const ListofHirer = () => {
   };
 
   const handleLogout = () => {
-    localStorage.clear()
+    sessionStorage.clear()
     navigate("/login");
   };
 

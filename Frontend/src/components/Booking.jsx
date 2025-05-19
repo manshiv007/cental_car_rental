@@ -1,7 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 const BookingList = () => {
+  const nav= useNavigate()
+    useEffect(()=>{
+      const authenticate=sessionStorage.getItem("auth")
+          if(!authenticate){
+            nav("/login")        
+          }
+      },[])
   const [bookings, setBookings] = useState([]);
   const [showBookings, setShowBookings] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -25,7 +32,7 @@ const BookingList = () => {
     }
   };
   const handleLogout = () => {
-    localStorage.clear()
+    sessionStorage.clear()
     navigate("/login");
   };
   const sidebarButtonStyle = {

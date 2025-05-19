@@ -3,13 +3,20 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const RenterBooking = () => {
+  const nav= useNavigate()
+    useEffect(()=>{
+      const authenticate=sessionStorage.getItem("auth")
+          if(!authenticate){
+            nav("/login")        
+          }
+      },[])
   const [bookings, setBookings] = useState([]);
   const navigate = useNavigate();
 
   // ✅ Redirect to login if not logged in
   useEffect(() => {
-    const userId = localStorage.getItem("userId");
-    const userType = localStorage.getItem("userType");
+    const userId = sessionStorage.getItem("userId");
+    const userType = sessionStorage.getItem("userType");
 
     if (!userId || userType !== "renter") {
       navigate("/login"); // Adjust based on your route

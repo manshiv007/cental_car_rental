@@ -9,6 +9,13 @@ const BrandManager = () => {
   const [brands, setBrands] = useState([]);
   const [formData, setFormData] = useState({ name: "", description: "" });
   const [editingBrandId, setEditingBrandId] = useState(null);
+  const nav= useNavigate()
+  useEffect(()=>{
+    const authenticate=sessionStorage.getItem("auth")
+        if(!authenticate){
+          nav("/login")        
+        }
+    },[])
   const navigate = useNavigate();
 
   const fetchBrands = async () => {
@@ -27,7 +34,7 @@ const BrandManager = () => {
   }, []);
 
   const handleLogout = () => {
-    localStorage.clear()
+    sessionStorage.clear()
     navigate("/login");
   };
 

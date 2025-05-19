@@ -3,6 +3,13 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const ViewCarHirer = () => {
+  const nav= useNavigate()
+  useEffect(()=>{
+    const authenticate=sessionStorage.getItem("auth")
+        if(!authenticate){
+          nav("/login")        
+        }
+    },[])
   const [cars, setCars] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -29,7 +36,7 @@ const ViewCarHirer = () => {
   }, []);
 
   const handleLogout = () => {
-    localStorage.clear()
+    sessionStorage.clear()
     navigate("/login");
   };
 
