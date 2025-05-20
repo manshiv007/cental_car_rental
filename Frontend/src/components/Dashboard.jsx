@@ -50,7 +50,7 @@ const AdminDashboard = () => {
                     onClick={() => navigate(item.path)}
                     style={{
                       width: "100%",
-                      backgroundColor: "purple",
+                      backgroundColor: "#6A0DAD",
                       color: "white",
                       border: "none",
                       padding: "10px",

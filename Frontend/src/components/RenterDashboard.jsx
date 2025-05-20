@@ -2,6 +2,14 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const RenterDashboard = () => {
+const nav= useNavigate()
+  useEffect(()=>{
+    const authenticate=sessionStorage.getItem("auth")
+    if(!authenticate){
+      nav("/login")        
+    }
+  },[])
+
   const navigate = useNavigate();
   const [showBookingOptions, setShowBookingOptions] = useState(false);
 
@@ -24,7 +32,7 @@ const RenterDashboard = () => {
 
   const sidebarButtonStyle = {
     width: "100%",
-    backgroundColor: "#FF69B4",
+    backgroundColor: "brown",
     color: "white",
     border: "none",
     padding: "10px",
@@ -48,7 +56,7 @@ const RenterDashboard = () => {
           }}
         >
           <div>
-            <h4 className="text-center mb-4" style={{ color: "deeppink", fontWeight: "bold" }}>
+            <h4 className="text-center mb-4" style={{ color: "brown", fontWeight: "bolder" }}>
               CAR RENTER
             </h4>
             <ul className="list-unstyled">

@@ -3,6 +3,8 @@
 const Hirer = require("../hirer/hirerModel")
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const User = require("../user/userModel")
+
 require("dotenv").config();
 
 const registerHirer = async (req, res) => {
@@ -164,7 +166,7 @@ const changePassword = async (req, res) => {
             });
         }
 
-        const user = await Hirer.findById(userId);
+        const user = await User.findById(userId);
         if (!user) {
             return res.status(404).json({
                 success: false,

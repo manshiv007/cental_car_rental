@@ -4,11 +4,13 @@ import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 const CrudCar = () => {
-  const authenticate=sessionStorage.getItem("auth")
-  const nav= useNavigate()
-    if(!authenticate){
-      nav("/login")        
-    }
+ const nav= useNavigate()
+     useEffect(()=>{
+       const authenticate=sessionStorage.getItem("auth")
+           if(!authenticate){
+             nav("/login")        
+           }
+       },[])
   const [cars, setCars] = useState([]);
   const [brands, setBrands] = useState([]);
   const [formData, setFormData] = useState({
@@ -129,7 +131,7 @@ const CrudCar = () => {
           }}
         >
           <div>
-            <h4 className="text-center mb-4" style={{ color: "purple", fontWeight: "bolder" }}>
+            <h4 className="text-center mb-4" style={{ color: "#6A0DAD", fontWeight: "bolder" }}>
               CAR RENTAL SYSTEM
             </h4>
             <ul className="nav flex-column">
@@ -146,7 +148,7 @@ const CrudCar = () => {
                     onClick={() => navigate(item.path)}
                     style={{
                       width: "100%",
-                      backgroundColor: "purple",
+                      backgroundColor: "#6A0DAD", 
                       color: "white",
                       border: "none",
                       padding: "10px",

@@ -52,7 +52,7 @@ export default function Ourcars(){
                             </div>
                         </div>
                         <div className="mb-4">
-                            <h4 className="bg-white text-primary rounded-pill py-2 px-4 mb-0">{car.price}</h4>
+                            <h4 className="bg-white text-primary rounded-pill py-2 px-4 mb-0">{car.price}/day</h4>
                         </div>
                         <div className="row gy-2 gx-0 text-center mb-4">
                             <div className="col-4 border-end border-white">
@@ -74,7 +74,7 @@ export default function Ourcars(){
                                 <i className="fa fa-road text-dark"></i> <span className="text-body ms-1">380 km Range</span>
                             </div>
                         </div>
-                        <a href="/signup" className="btn btn-primary rounded-pill d-flex justify-content-center py-3">Book Now</a>
+                        <a href="/signup" className="btn btn-primary rounded-pill d-flex justify-content-center py-3">Login To Continue</a>
                     </div>
                 </div>
             </div>

@@ -14,7 +14,7 @@ const HirerDashboard = () => {
   const navigate = useNavigate()
     
   const handleLogout = () => {
-    localStorage.clear()
+    sessionStorage.clear()
     navigate("/login");
   };
   
@@ -30,6 +30,7 @@ const HirerDashboard = () => {
             padding: "20px",
             height: "100vh",
             borderRight: "1px solid #ddd",
+           
           }}
         >
           <div>

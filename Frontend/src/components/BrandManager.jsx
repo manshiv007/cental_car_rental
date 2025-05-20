@@ -4,28 +4,26 @@ import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
-
 const BrandManager = () => {
   const [brands, setBrands] = useState([]);
   const [formData, setFormData] = useState({ name: "", description: "" });
   const [editingBrandId, setEditingBrandId] = useState(null);
-  const nav= useNavigate()
-  useEffect(()=>{
-    const authenticate=sessionStorage.getItem("auth")
-        if(!authenticate){
-          nav("/login")        
-        }
-    },[])
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const authenticate = sessionStorage.getItem("auth");
+    if (!authenticate) {
+      navigate("/login");
+    }
+  }, []);
 
   const fetchBrands = async () => {
     try {
       const res = await axios.post("http://localhost:3001/api/getallbrand");
-      console.log(res)
-      setBrands(res.data.data); // corrected: res.data.data instead of res.data.brands
+      setBrands(res.data.data);
     } catch (err) {
       console.error("Error fetching brands:", err.message);
-      toast.error("failed to fetch brand")
+      toast.error("Failed to fetch brand");
     }
   };
 
@@ -34,7 +32,7 @@ const BrandManager = () => {
   }, []);
 
   const handleLogout = () => {
-    sessionStorage.clear()
+    sessionStorage.clear();
     navigate("/login");
   };
 
@@ -46,17 +44,17 @@ const BrandManager = () => {
           id: editingBrandId,
           ...formData,
         });
-        toast.success("Brand Updated successfully")
+        toast.success("Brand updated successfully");
       } else {
         await axios.post("http://localhost:3001/api/addbrand", formData);
-        toast.success("Brand Add Successfully")
+        toast.success("Brand added successfully");
       }
       setFormData({ name: "", description: "" });
       setEditingBrandId(null);
       fetchBrands();
     } catch (err) {
       console.error("Error adding/updating brand:", err.message);
-      toast.error("Operation failed")
+      toast.error("Operation failed");
     }
   };
 
@@ -66,11 +64,11 @@ const BrandManager = () => {
 
     try {
       await axios.post("http://localhost:3001/api/deletebrand", { id });
-      toast.success("Brand delete successfully")
+      toast.success("Brand deleted successfully");
       fetchBrands();
     } catch (err) {
       console.error("Error deleting brand:", err.message);
-      toast.error("failed to delete brand")
+      toast.error("Failed to delete brand");
     }
   };
 
@@ -86,24 +84,26 @@ const BrandManager = () => {
 
   return (
     <div className="container-fluid">
-      <>
-  {/* ...Your JSX content... */}
-  <ToastContainer position="top-right" autoClose={3000} />
-</>
+      <ToastContainer position="top-right" autoClose={3000} />
 
       <div className="row">
-        {/* Sidebar */}
+        {/* Fixed Sidebar */}
         <aside
-          className="col-md-2 d-flex flex-column justify-content-between"
           style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "220px",
+            height: "100vh",
             backgroundColor: "#F0F2F5",
             padding: "20px",
-            height: "100vh",
             borderRight: "1px solid #ddd",
+            zIndex: 1000,
           }}
+          className="d-flex flex-column justify-content-between"
         >
           <div>
-            <h4 className="text-center mb-4" style={{ color: "purple", fontWeight: "bolder" }}>
+            <h4 className="text-center mb-4" style={{ color: "#6A0DAD", fontWeight: "bolder" }}>
               CAR RENTAL SYSTEM
             </h4>
             <ul className="nav flex-column">
@@ -120,7 +120,7 @@ const BrandManager = () => {
                     onClick={() => navigate(item.path)}
                     style={{
                       width: "100%",
-                      backgroundColor: "purple",
+                      backgroundColor: "#6A0DAD",
                       color: "white",
                       border: "none",
                       padding: "10px",
@@ -138,104 +138,112 @@ const BrandManager = () => {
             LOG OUT
           </button>
         </aside>
+
         {/* Main Content */}
-        <main className="col-md-10 p-4" style={{ backgroundColor: "#FFFFFF" }}>
-    <div className="container mt-5">
-      <div className="d-flex justify-content-between align-items-center mb-4">
-        <h2>Manage Brands</h2>
-        <button onClick={handleLogout} className="btn btn-warning">
-          Logout
-        </button>
-      </div>
-
-      <form onSubmit={handleSubmit} className="mb-4">
-        <div className="row">
-          <div className="col-md-4 mb-2">
-            <input
-              type="text"
-              placeholder="Brand Name"
-              className="form-control"
-              value={formData.name}
-              onChange={(e) =>
-                setFormData({ ...formData, name: e.target.value })
-              }
-              required
-            />
-          </div>
-          <div className="col-md-4 mb-2">
-            <input
-              type="text"
-              placeholder="Description"
-              className="form-control"
-              value={formData.description}
-              onChange={(e) =>
-                setFormData({ ...formData, description: e.target.value })
-              }
-              required
-            />
-          </div>
-          <div className="col-md-4 mb-2">
-            <button type="submit" className="btn btn-primary w-100">
-              {editingBrandId ? "Update Brand" : "Add Brand"}
-            </button>
-            {editingBrandId && (
-              <button
-                type="button"
-                className="btn btn-secondary w-100 mt-2"
-                onClick={handleCancelEdit}
-              >
-                Cancel Edit
+        <main
+          className="col"
+          style={{
+            marginLeft: "220px",
+            padding: "40px 20px",
+            backgroundColor: "#FFFFFF",
+            minHeight: "100vh",
+          }}
+        >
+          <div className="container">
+            <div className="d-flex justify-content-between align-items-center mb-4">
+              <h2>Manage Brands</h2>
+              <button onClick={handleLogout} className="btn btn-warning">
+                Logout
               </button>
-            )}
-          </div>
-        </div>
-      </form>
+            </div>
 
-      <table className="table table-bordered">
-        <thead className="table-dark">
-          <tr>
-            <th>Name</th>
-            <th>Description</th>
-            <th style={{ width: "150px" }}>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {brands.length === 0 ? (
-            <tr>
-              <td colSpan="3" className="text-center">
-                No brands found
-              </td>
-            </tr>
-          ) : (
-            brands.map((brand) => (
-              <tr key={brand._id}>
-                <td>{brand.name}</td>
-                <td>{brand.description}</td>
-                <td>
-                  <button
-                    className="btn btn-warning btn-sm me-2"
-                    onClick={() => handleEdit(brand)}
-                  >
-                    Edit
+            <form onSubmit={handleSubmit} className="mb-4">
+              <div className="row">
+                <div className="col-md-4 mb-2">
+                  <input
+                    type="text"
+                    placeholder="Brand Name"
+                    className="form-control"
+                    value={formData.name}
+                    onChange={(e) =>
+                      setFormData({ ...formData, name: e.target.value })
+                    }
+                    required
+                  />
+                </div>
+                <div className="col-md-4 mb-2">
+                  <input
+                    type="text"
+                    placeholder="Description"
+                    className="form-control"
+                    value={formData.description}
+                    onChange={(e) =>
+                      setFormData({ ...formData, description: e.target.value })
+                    }
+                    required
+                  />
+                </div>
+                <div className="col-md-4 mb-2">
+                  <button type="submit" className="btn btn-primary w-100">
+                    {editingBrandId ? "Update Brand" : "Add Brand"}
                   </button>
-                  <button
-                    className="btn btn-danger btn-sm"
-                    onClick={() => handleDelete(brand._id)}
-                  >
-                    Delete
-                  </button>
-                </td>
-              </tr>
-            ))
-          )}
-        </tbody>
-      </table>
+                  {editingBrandId && (
+                    <button
+                      type="button"
+                      className="btn btn-secondary w-100 mt-2"
+                      onClick={handleCancelEdit}
+                    >
+                      Cancel Edit
+                    </button>
+                  )}
+                </div>
+              </div>
+            </form>
+
+            <table className="table table-bordered">
+              <thead className="table-dark">
+                <tr>
+                  <th>Name</th>
+                  <th>Description</th>
+                  <th style={{ width: "150px" }}>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {brands.length === 0 ? (
+                  <tr>
+                    <td colSpan="3" className="text-center">
+                      No brands found
+                    </td>
+                  </tr>
+                ) : (
+                  brands.map((brand) => (
+                    <tr key={brand._id}>
+                      <td>{brand.name}</td>
+                      <td>{brand.description}</td>
+                      <td>
+                        <button
+                          className="btn btn-warning btn-sm me-2"
+                          onClick={() => handleEdit(brand)}
+                        >
+                          Edit
+                        </button>
+                        <button
+                          className="btn btn-danger btn-sm"
+                          onClick={() => handleDelete(brand._id)}
+                        >
+                          Delete
+                        </button>
+                      </td>
+                    </tr>
+                  ))
+                )}
+              </tbody>
+            </table>
+          </div>
+        </main>
+      </div>
     </div>
-    </main>
-    </div>
-    </div>
-    
   );
 };
 
-export default BrandManager;
+export default BrandManager;

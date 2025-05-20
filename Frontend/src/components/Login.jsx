@@ -29,6 +29,7 @@ const Login = () => {
 
     try {
       const res = await axios.post("http://localhost:3001/api/login", formData);
+      console.log(res.data)
       const { success, message, token, user } = res.data;
 
       if (!success) {
